@@ -44,17 +44,21 @@ public class GestionHotelApplication implements CommandLineRunner {
         // TODO Auto-generated method stub
         Role role1=new Role(null,"Admin");
         Role role2=new Role(null,"User");
+        Role role3=new Role(null,"Receptionniste");
 
         roleService.createNewRole(role1);
         roleService.createNewRole(role2);
+        roleService.createNewRole(role3);
 
         User user1= new User(null,"ayman","hattad",4000.0,"ahattad@gmail.com","ayman123",new HashSet<>(),new ArrayList<>());
         userService.registerNewUser(user1);
+        User user2= new User(null,"omar","benothmane",9000.0,"omar@gmail.com","omar",new HashSet<>(),new ArrayList<>());
+        userService.registerNewUser(user2);
 
-        User admin1= new User(null,"sohayl","hattad",6000.0,"sohattad@gmail.com","sohayl123",new HashSet<>(),new ArrayList<>());
-        userService.registerNewAdmin(admin1);
-        User admin2= new User(null,"ayoub","labied",7000.0,"alabied","ayoub123",new HashSet<>(),new ArrayList<>());
-        userService.registerNewAdmin(admin2);
+        User admin= new User(null,"sohayl","hattad",6000.0,"sohattad@gmail.com","sohayl123",new HashSet<>(),new ArrayList<>());
+        userService.registerNewAdmin(admin);
+        User recep= new User(null,"ayoub","labied",7000.0,"alabied","ayoub123",new HashSet<>(),new ArrayList<>());
+        userService.registerNewReceptionniste(recep);
 
         ServiceChambre serviceChambre1 = new ServiceChambre(null,"nettoyage",new ArrayList<>());
         serviceChambreService.saveServiceChambre(serviceChambre1);
@@ -85,16 +89,22 @@ public class GestionHotelApplication implements CommandLineRunner {
 
 
         Reservation res1= new Reservation(null, LocalDate.now(),LocalDate.of(2022,07,05),false,client1,user1,chambre1,new ArrayList<>(),new Facture());
-        res1.addServiceToReservation(serviceHotel1);
+        res1.addServiceToReservation(serviceHotel2);
         res1.setFacture(new Facture());
         reservationService.saveReservation(res1);
         reservationService.updateFacture(res1.getId());
 
-        Reservation res2= new Reservation(null, LocalDate.now(),  LocalDate.of(2022,07,07),true,client2,admin1,chambre2,new ArrayList<>(),new Facture());
+        Reservation res2= new Reservation(null, LocalDate.now(),  LocalDate.of(2022,07,07),true,client2,recep,chambre2,new ArrayList<>(),new Facture());
         res2.addServiceToReservation(serviceHotel2);
         res2.setFacture(new Facture());
         reservationService.saveReservation(res2);
         reservationService.updateFacture(res2.getId());
+
+        Reservation res3= new Reservation(null, LocalDate.now(),  LocalDate.of(2022,07,30),true,client2,admin,chambre3,new ArrayList<>(),new Facture());
+        res3.addServiceToReservation(serviceHotel1);
+        res3.setFacture(new Facture());
+        reservationService.saveReservation(res3);
+        reservationService.updateFacture(res3.getId());
 
     }
 }

@@ -35,7 +35,7 @@ public class FactureController {
         return new ResponseEntity<>(factureService.getFacturesByPrix(prix),HttpStatus.OK);
     }
 
-    @PostMapping("/createNewClient")
+    @PostMapping("/createNewFacture")
     @PreAuthorize("hasAnyRole('Admin')")
     public ResponseEntity<Facture> saveFacture(@RequestBody Facture facture) {
         return new ResponseEntity<>(factureService.saveFacture(facture), HttpStatus.CREATED);

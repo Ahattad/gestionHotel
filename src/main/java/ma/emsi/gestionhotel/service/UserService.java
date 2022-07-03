@@ -78,6 +78,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User registerNewReceptionniste(User user) {
+        Role role = rolerepository.findByNomRole("Receptionniste");
+        Set<Role> userRoles = new HashSet<>();
+        userRoles.add(role);
+        user.setRole(userRoles);
+        user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+
+        return userRepository.save(user);
+    }
+
     public User registerNewAdmin(User user) {
         Role role = rolerepository.findByNomRole("Admin");
         Set<Role> userRoles = new HashSet<>();
